@@ -175,13 +175,12 @@ public class TicketController {
 		//User user = userRepository.findById(ticket.getAssignedTo().getId());
 		Ticket activeTicket = ticketRepository.findById(id);
 		//System.out.println(activeTicket.getAssignedTo().getEmail());
-		activeTicket.setDescription(ticket.getDescription());
 		activeTicket.setStage(ticket.getStage());
 		if(ticket.getAssignedTo()!=null)
 		activeTicket.setAssignedTo(ticket.getAssignedTo());
 		ticketRepository.save(activeTicket);
 
-		return "redirect:/ticket/" + id;
+		return "redirect:/ticket/all";
 	}
 
 	// processes ticket closure
@@ -204,7 +203,7 @@ public class TicketController {
 		Ticket activeTicket = ticketRepository.findById(id);
 		activeTicket.setStage(Stage.RECU);
 		activeTicket.setDateClosed(null);
-		return "redirect:/ticket/all";
+		return "redirect:/ticket/"+id;
 	}
 
 }

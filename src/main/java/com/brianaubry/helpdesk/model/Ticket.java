@@ -19,11 +19,11 @@ public class Ticket {
     private int id;
 
     @NotNull
-    @Size(min = 1, max = 50, message = "Title too long (max 50 characters)")
+    @Size(min = 1, max = 50, message = "Titre trop long")
     private String title;
 
     @NotNull
-    @Size(min = 1, max = 500, message = "Description too long (max 500 characters)")
+    @Size(min = 1, max = 500, message = "Description trop longue")
     private String description;
 
     @Enumerated(EnumType.STRING)

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 
@@ -44,4 +44,133 @@
 	</div>
 
 </body>
+</html>-->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="fragments :: head"></head>
+<meta charset="utf-8" />
+<meta name="viewport"
+  content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Material Dashboard 2 by Creative Tim</title>
+<!--     Fonts and icons     -->
+<link rel="stylesheet" th:href="@{/css/material-dashboard.css}">
+<link id="pagestyle" th:href="@{/css/material-dashboard.css?v=3.0.4}"
+  rel="stylesheet" />
+</head>
+
+<body class="g-sidenav-show  bg-gray-200">
+  <nav th:replace="fragments :: navigation"></nav>
+<aside th:each="role : ${loggedInUser.roles}"
+        th:if="${role.role} == 'SUPPORT'"
+    class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark"
+    id="sidenav-main">
+    <div class="sidenav-header">
+      <i
+        class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
+        aria-hidden="true" id="iconSidenav"></i> <a class="navbar-brand m-0"
+        href="/ticket/all"> <span
+        class="ms-1 font-weight-bold text-white">Quick Link</span>
+      </a>
+    </div>
+    <hr class="horizontal light mt-0 mb-2">
+    <div class="collapse navbar-collapse  w-auto "
+      id="sidenav-collapse-main">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link text-white "
+          href="/ticket/new">
+            <div
+              class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">dashboard</i>
+            </div> <span class="nav-link-text ms-1">Ouvrir un ticket</span>
+        </a></li>
+        <li class="nav-item"><a
+          class="nav-link text-white active bg-gradient-primary"
+          href="/ticket/">
+            <div
+              class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">table_view</i>
+            </div> <span class="nav-link-text ms-1">Vos tickets</span>
+        </a></li>
+        <li class="nav-item"><a class="nav-link text-white "
+          href="/ticket/all">
+            <div
+              class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">receipt_long</i>
+            </div> <span class="nav-link-text ms-1">Tous les tickets</span>
+        </a></li>
+
+      </ul>
+    </div>
+  </aside>
+  <main
+    class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    <!-- Navbar -->
+    <!-- End Navbar -->
+    <div class="container-fluid py-4">
+      <div class="row">
+        <div class="col-12">
+          <div class="card my-4">
+            <div
+              class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+              <div
+                class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                <h6 class="text-white text-capitalize ps-3">Mes tickets</h6>
+              </div>
+            </div>
+            <div class="card-body px-0 pb-2">
+              <div class="table-responsive p-0">
+                <table class="table align-items-center mb-0">
+                  <thead>
+                    <tr >
+                      <th
+                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Titre du ticket</th>
+                                  <th
+                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Etat</th>
+                      <th
+                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Assigne a
+                        A</th>
+                      <th
+                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Priorite</th>
+                      <th
+                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Departement
+                        A</th>
+                      <th
+                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Date de creation
+                        A</th>
+                      <th
+                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Derniere modification
+                        A</th>  
+                    </tr>
+                  </thead>
+              
+                  <tbody>
+                  <div>
+                    <tr th:each="ticket : ${openTickets}" th:if="${ticket.assignedTo != null} and ${ticket.getAssignedTo().id == loggedInUser.getId()}">
+                      <td th:text="${ticket.title}"></td>
+                      <td th:text="${ticket.stage}"></td>
+                      <td class="col-md-2"
+          th:text="${ticket.assignedTo != null} ? ${ticket.assignedTo.email} : 'Unassigned'">Unassigned</td>
+                      <td th:text="${ticket.priorite}" class="text-center"></td>
+                      <td th:text="${ticket.departement}" class="text-center"></td>
+                      <td th:text="${ticket.dateOpened}" class="text-center"></td>
+                      <td th:text="${ticket.lastUpdated}" class="text-center"></td>
+                      <td th:if="${#lists.contains(loggedInUser.roles,'ADMIN')} OR ${#lists.contains(loggedInUser.roles,'SUPPORT')}" class="align-middle"><a th:href="@{'/ticket/'+${ticket.id}}"
+                        class="text-secondary font-weight-bold text-xs"
+                        data-toggle="tooltip" title="Edit user">
+                          Modifier </a></td>
+                    </tr>
+                    </div>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</body>
+
 </html>

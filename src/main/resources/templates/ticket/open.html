@@ -69,43 +69,50 @@
 							class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
 							<div
 								class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-								<h6 class="text-white text-capitalize ps-3">Authors table</h6>
+								<h6 class="text-white text-capitalize ps-3">Mes tickets</h6>
 							</div>
 						</div>
 						<div class="card-body px-0 pb-2">
 							<div class="table-responsive p-0">
-								<table class="table align-items-center mb-0" th:each="role : ${loggedInUser.roles}" >
+								<table class="table align-items-center mb-0">
 									<thead>
 										<tr >
 											<th
-												class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">TITRE</th>
+												class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Titre du ticket</th>
+                      						<th
+												class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Etat</th>
 											<th
-												class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">PRIORITE</th>
+												class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Assigne a
+												</th>
 											<th
-												class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">DEPARTEMENT</th>
+												class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Priorite</th>
 											<th
-												class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ASSIGNE
-												A</th>
+												class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Departement
+												</th>
 											<th
-												class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">STATUS</th>
-
+												class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Date de creation
+												</th>
+											<th
+												class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Derniere modification
+												</th>	
 										</tr>
 									</thead>
+							
 									<tbody>
 									<div>
 										<tr th:each="ticket : ${openTickets}" th:if="${ticket.getCreatedBy().id == loggedInUser.getId()}">
-											<td th:text="${ticket.title}"></td>
-											<td th:text="${ticket.priorite}"></td>
-											<td th:text="${ticket.departement}"></td>
-											<td class="col-md-2"
-					th:text="${ticket.assignedTo != null} ? ${ticket.assignedTo.email} : 'Unassigned'">Unassigned</td>
-
-				
-											<td th:text="${ticket.stage}"></td>
-											<td th:if="${role.role} == 'SUPPORT' or ${role.role} == 'ADMIN'" class="align-middle"><a th:href="@{'/ticket/'+${ticket.id}}"
+											<td th:text="${ticket.title}" class="text-center">></td>
+                      						<td th:text="${ticket.stage}" class="text-center">></td>
+                      						<td class="col-md-2 text-center"
+												th:text="${ticket.assignedTo != null} ? ${ticket.assignedTo.email} : 'Unassigned'">Unassigned</td>
+											<td th:text="${ticket.priorite}" class="text-center"></td>
+											<td th:text="${ticket.departement}" class="text-center"></td>
+											<td th:text="${ticket.dateOpened}" class="text-center"></td>
+											<td th:text="${ticket.lastUpdated}" class="text-center"></td>
+											<td th:if="${not loggedInUser.roles.?[role == 'ADMIN'].isEmpty()} OR ${not loggedInUser.roles.?[role == 'SUPPORT'].isEmpty()}" class="align-middle"><a th:href="@{'/ticket/'+${ticket.id}}"
 												class="text-secondary font-weight-bold text-xs"
-												data-toggle="tooltip" data-original-title="Edit user">
-													Edit </a></td>
+												data-toggle="tooltip" title="modifier le ticket">
+													Modifier </a></td>
 										</tr>
 										</div>
 									</tbody>

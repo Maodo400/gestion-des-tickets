@@ -16,7 +16,7 @@
 </head>
 <body>
 
-<nav th:fragment="navigation" class="navbar navbar-dark bg-dark navbar-expand-lg">
+<!--<nav th:fragment="navigation" class="navbar navbar-dark bg-dark navbar-expand-lg">
     <a class="navbar-brand" href="/">HelpDesk v0.1</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,8 +29,8 @@
                 <a th:if="${role.role} == 'SUPPORT'" class="nav-link" href="/">Dashboard <span class="sr-only">(current)</span></a>
             </li>
             <!--<li class="nav-item">-->
-                <!--<a class="nav-link" href="/">Link</a>-->
-            <!--</li>-->
+                <!--<a class="nav-link" href="/">Link</a>
+            </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
@@ -41,21 +41,88 @@
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="/ticket/open">My Open Tickets</a>
                     <a class="dropdown-item" href="/ticket/close">My Closed Tickets</a>
-                        <!--TODO - send to closed ticket queue when page is created-->
+                       TODO - send to closed ticket queue when page is created
                 </div>
+
             </li>
             <!--<li class="nav-item">-->
                 <!--<a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>-->
-            <!--</li>-->
-        </ul>
-        <ul class="navbar-nav navbar-right">
-            <li  class="nav-item dropdown">
+<!--             </li> -->
+<!--         </ul> -->
+<!--         <ul class="navbar-nav navbar-right"> -->
+<!--             <li class="nav-item active" > -->
+<!--                 Button trigger modal -->
+<!--                 <button type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="./popup_newticket.html"> -->
+<!--                     New ticket -->
+<!--                 </button> -->
+
+                
+
+<!--             </li> -->
+<!--             <li  class="nav-item dropdown"> -->
+<!--                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" -->
+<!--                    aria-haspopup="true" aria-expanded="false" th:text="${loggedInUser.getEmail()}"> -->
+<!--                 </a> -->
+<!--                 <div class="dropdown-menu" aria-labelledby="navbarDropdown"> -->
+<!--                         TODO - create account page, change redirect -->
+
+<!--                     <div th:each="role : ${loggedInUser.roles}"> -->
+<!--                         <a th:if="${role.role} == 'ADMIN'"  class="dropdown-item" href="/admin/">Admin Panel</a> -->
+<!--                     </div> -->
+<!--                     <a class="dropdown-item" href="#">Account</a> -->
+<!--                     <a class="dropdown-item" th:href="@{/logout}">Sign Out</a> -->
+<!--                 </div> -->
+<!--             </li> -->
+<!--         </ul> -->
+<!--         <ul class="navbar-nav navbar-right"> -->
+<!--             <li class="nav-item"><a href="/user/login"><span class="glyphicon glyphicon-log-in"></span>Login</a></li> -->
+<!--         </ul> -->
+<!--         <form class="form-inline my-2 my-lg-1"> -->
+<!--             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> -->
+<!--             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
+<!--         </form> -->
+<!--     </div> -->
+<!-- </nav>--> 
+
+        <nav th:fragment="navigation" class="navbar navbar-expand-lg blur border-radius-lg top-0 z-index-3 shadow position-absolute mt-3 py-2 start-12 end-0 mx-4">
+          <div class="container-fluid ps-2 pe-0">
+            <a class="navbar-brand font-weight-bolder ms-lg-0 ms-3 " href="/">
+              Home
+            </a>
+            <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon mt-2">
+                <span class="navbar-toggler-bar bar1"></span>
+                <span class="navbar-toggler-bar bar2"></span>
+                <span class="navbar-toggler-bar bar3"></span>
+              </span>
+            </button>
+            <div class="collapse navbar-collapse" id="navigation">
+              <ul class="navbar-nav mx-auto">
+                <li class="nav-item">
+                  <a class="nav-link d-flex align-items-center me-2 active" aria-current="page" href="/">
+                    <i class="fa fa-chart-pie opacity-6 text-dark me-1"></i>
+                    Dashboard
+                  </a>
+                </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    Tickets
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="/ticket/new">Nouveau Ticket</a>
+                    <a class="dropdown-item" href="/ticket/open">Mes Tickets en cours</a>
+                    <a class="dropdown-item" href="/ticket/close">Mes Tickets cloturé</a>
+                </div>
+
+            </li>
+                  <li  class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false" th:text="${loggedInUser.getEmail()}">
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <!--TODO - create account page, change redirect-->
-
                     <div th:each="role : ${loggedInUser.roles}">
                         <a th:if="${role.role} == 'ADMIN'"  class="dropdown-item" href="/admin/">Admin Panel</a>
                     </div>
@@ -63,16 +130,73 @@
                     <a class="dropdown-item" th:href="@{/logout}">Sign Out</a>
                 </div>
             </li>
-        </ul>
-        <!--<ul class="navbar-nav navbar-right">-->
-            <!--<li class="nav-item"><a href="/user/login"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>-->
-        <!--</ul>-->
-        <!--<form class="form-inline my-2 my-lg-1">-->
-            <!--<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">-->
-            <!--<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
-        <!--</form>-->
-    </div>
-</nav>
+              </ul>
+            </div>
+          </div>
+        </nav>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title font-weight-normal" id="exampleModalLabel">Créer un nouveau ticket</h5>
+                <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                    
+                    <form role="form" method="POST"
+                        th:action="@{/ticket/new}" th:object="${ticket}">
+                        <div class="input-group input-group-outline mb-3">
+                        <label class="form-label"></label> 
+                        <input placeholder="Titre" class="form-control" id="title" name="title" th:field="*{title}" type="text">
+                            <div class="input-group input-group-outline mb-3">
+                            <span th:errors="*{title}" style="color: red"></span>
+                            </div>
+                        </div>
+                        <div class="input-group input-group-outline mb-3">
+                        <label class="form-label"></label> 
+                        <select id="ticket-status" name="ticket-status" th:field="${priorite}" class="form-select">
+                            <option th:each="priorite : ${priorites}"
+                            th:value="${priorite}"
+                            th:text="${priorite.name}"
+                            th:selected="${ticket.priorite}"></option>
+                        </select>
+                        </div>
+                        <div class="input-group input-group-outline mb-3">
+                        <label class="form-label"></label> 
+                        <select id="ticket-status" name="ticket-status" th:field="*{departement}" class="form-select">
+                            <option th:each="departement : ${departements}" 
+                            th:value="${departement}"
+                            th:text="${departement.name}"
+                            th:selected="${ticket.departement}"></option>
+                        </select>
+                        </div>
+                        <div class="input-group input-group-outline mb-3">
+                        <label class="form-label"></label>
+                        <textarea class="form-control description-field" th:field="*{description}" id="description" name="description"></textarea>
+                        <div class="input-group input-group-outline mb-3">
+                            <span th:errors="*{description}" style="color: red"></span></div>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit"
+                            class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0">Sign Up</button>
+                        </div>
+                    </form>
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn bg-gradient-primary">Create new ticket</button>
+                </div>
+            </div>
+            </div>
+        </div>
+
+
+
 
 </body>
 </html>

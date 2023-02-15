@@ -6,7 +6,7 @@
 
 <!-- <nav th:replace="fragments :: navigation"></nav> -->
 
-<!-- <!--Table--> 
+<!-- <!--Table-->
 <!-- <div class="row"> -->
 <!--     <div class="col-md-1"></div> -->
 <!--     <div class="col-md-8"> -->
@@ -56,69 +56,78 @@
 <head th:replace="fragments :: head"></head>
 <meta charset="utf-8" />
 <meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Material Dashboard 2 by Creative Tim</title>
 <!--     Fonts and icons     -->
 <link rel="stylesheet" th:href="@{/css/material-dashboard.css}">
 <link id="pagestyle" th:href="@{/css/material-dashboard.css?v=3.0.4}"
-	rel="stylesheet" />
+  rel="stylesheet" />
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
-	<nav th:replace="fragments :: navigation"></nav>
+  <nav th:replace="fragments :: navigation"></nav>
 
-	<main
-		class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
-		<div class="container-fluid py-4">
-			<div class="row">
-				<div class="col-12">
-					<div class="card my-4">
-						<div
-							class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-							<div
-								class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-								<h6 class="text-white text-capitalize ps-3">Authors table</h6>
-							</div>
-						</div>
-						<div class="card-body px-0 pb-2">
-							<div class="table-responsive p-0">
-								<table class="table align-items-center mb-0">
-									<thead>
-										<tr>
-											<th
-												class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
-											<th
-												class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">NAME</th>
-											<th
-												class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">EMAIL</th>
-											<th
-												class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ROLE</th>
-										</tr>
-									</thead>
-            <tbody>
-            <tr th:each="user : ${allUsers}">
-                <td th:text="${user.id}"></td>
-                <td th:text="${user.firstName} + ' ' + ${user.lastName}"></td>
-                <td th:text="${user.email}"></td>
-                <td><span th:each="role : ${user.roles}" th:text="${role.role}+' '"></span></td>
-                <td>
-                    <form method="post" th:action="'/admin/users/add-role/' + ${user.id}">
-                        <button type="submit">Add Tech Role</button>
-                    </form>
-                    <!--<a th:href="'admin/users/add-role/' + ${user.id}">Add Tech Role</a>-->
-                </td>
-            </tr>
+  <main
+    class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    <div class="container-fluid py-4">
+      <div class="row">
+          <div class="col-md-2">
+        <a href="/admin/create" class="btn btn-primary">Create new users</a>
+    </div>
+        <div class="col-12">
+          <div class="card my-4">
+            <div
+              class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+              <div
+                class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                <h6 class="text-white text-capitalize ps-3">Utilisateurs</h6>
+              </div>
+            </div>
+            <div class="card-body px-0 pb-2">
+            
+              <div class="table-responsive p-0">
+                <table class="table align-items-center mb-0">
+                  <thead>
+                    <tr>
+                      <th
+                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
+                      <th
+                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">NAME</th>
+                      <th
+                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">EMAIL</th>
+                      <th
+                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ROLE</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr th:each="user : ${allUsers}">
+                      <td th:text="${user.id}"></td>
+                      <td
+                        th:text="${user.firstName} + ' ' + ${user.lastName}"></td>
+                      <td th:text="${user.email}"></td>
+                      <td><span th:each="role : ${user.roles}"
+                        th:text="${role.role}+' '"></span></td>
+                      <td>
+                        <form method="post"
+                          th:action="'/admin/users/add-role/' + ${user.id}">
+                          <button type="submit"
+                            class="btn bg-gradient-primary center"
+                            data-bs-toggle="modal">Add Tech
+                            Role</button>
+                        </form> <!--<a th:href="'admin/users/add-role/' + ${user.id}">Add Tech Role</a>-->
+                      </td>
+                    </tr>
 
-            </tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-		</div>
-	</main>
+    </div>
+  </main>
 </body>
 
 </html>

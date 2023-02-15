@@ -1,0 +1,61 @@
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title font-weight-normal" id="exampleModalLabel">Créer un nouveau ticket</h5>
+        <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        <div class="modal-body">
+            
+            <form role="form" method="POST"
+                th:action="@{/ticket/new}" th:object="${ticket}">
+                <div class="input-group input-group-outline mb-3">
+                <label class="form-label"></label> 
+                <input placeholder="Titre" class="form-control" id="title" name="title" th:field="*{title}" type="text">
+                    <div class="input-group input-group-outline mb-3">
+                    <span th:errors="*{title}" style="color: red"></span>
+                    </div>
+                </div>
+                <div class="input-group input-group-outline mb-3">
+                <label class="form-label"></label> 
+                <select id="ticket-status" name="ticket-status" th:field="${priorite}" class="form-select">
+                    <option th:each="priorite : ${priorites}"
+                    th:value="${priorite}"
+                    th:text="${priorite.name}"
+                    th:selected="${ticket.priorite}"></option>
+                </select>
+                </div>
+                <div class="input-group input-group-outline mb-3">
+                <label class="form-label"></label> 
+                <select id="ticket-status" name="ticket-status" th:field="*{departement}" class="form-select">
+                    <option th:each="departement : ${departements}" 
+                    th:value="${departement}"
+                    th:text="${departement.name}"
+                    th:selected="${ticket.departement}"></option>
+                </select>
+                </div>
+                <div class="input-group input-group-outline mb-3">
+                <label class="form-label"></label>
+                <textarea class="form-control description-field" th:field="*{description}" id="description" name="description"></textarea>
+                <div class="input-group input-group-outline mb-3">
+                    <span th:errors="*{description}" style="color: red"></span></div>
+                </div>
+                <div class="text-center">
+                    <button type="submit"
+                    class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0">Sign Up</button>
+                </div>
+            </form>
+            
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn bg-gradient-primary">Create new ticket</button>
+        </div>
+    </div>
+    </div>
+</div>
+
+

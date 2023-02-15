@@ -1,95 +1,206 @@
+<!-- <!DOCTYPE html> -->
+<!-- <html lang="en" xmlns:th="http://www.thymeleaf.org/"> -->
+<!-- <head th:replace="fragments :: head"></head> -->
+
+<!-- <body class="container"> -->
+
+<!-- 	<nav th:replace="fragments :: navigation"></nav> -->
+
+<!-- 	<form class="form-horizontal" method="POST" th:action="@{/ticket/new}" -->
+<!-- 		th:object="${ticket}"> -->
+<!-- 		<fieldset> -->
+<!-- 			<!-- Form Name -->
+<!-- 			<legend>Create a new ticket</legend> -->
+
+<!-- 			<!-- Text input-->
+<!-- 			<div class="form-group"> -->
+<!-- 				<label class="col-md-4 control-label" for="title">Title</label> -->
+<!-- 				<div class="col-md-4"> -->
+<!-- 					<input id="title" name="title" th:field="*{title}" type="text" -->
+<!-- 						placeholder="" class="form-control input-md title-field"> -->
+<!-- 					<span th:errors="*{title}" class="error"></span><br /> <span -->
+<!-- 						class="countdown"></span> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+
+<!-- 			<div class="form-group"> -->
+<!-- 				<div class="row justify-content-center"> -->
+<!-- 					<label class="col-md-8 control-label" for="ticket-priorite">Priorité</label> -->
+<!-- 				</div> -->
+<!-- 				<div class="row justify-content-center"> -->
+
+<!-- 					<div class="col-md-4"> -->
+<!-- 						<input id="ticket-status" name="ticket-status" th:field="*{priorite}" type="text" placeholder="" class="form-control input-md"> -->
+<!-- 						<select id="ticket-status" name="ticket-status" -->
+<!-- 							th:field="*{priorite}" class="custom-select"> -->
+<!-- 							<option th:each="priorite : ${priorites}" th:value="${priorite}" -->
+<!-- 								th:text="${priorite.name}" th:selected="${ticket.priorite}"></option> -->
+<!-- 						</select> -->
+<!-- 					</div> -->
+<!-- 					<div class="col-md-4"></div> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+
+<!-- 			<div class="form-group"> -->
+<!-- 				<div class="row justify-content-center"> -->
+<!-- 					<label class="col-md-8 control-label" for="ticket-departement">Département</label> -->
+<!-- 				</div> -->
+<!-- 				<div class="row justify-content-center"> -->
+
+<!-- 					<div class="col-md-4"> -->
+<!-- 						<input id="ticket-status" name="ticket-status" th:field="*{departement}" type="text" placeholder="" class="form-control input-md"> -->
+<!-- 						<select id="ticket-status" name="ticket-status" -->
+<!-- 							th:field="*{departement}" class="custom-select"> -->
+<!-- 							<option th:each="departement : ${departements}" th:value="${departement}" -->
+<!-- 								th:text="${departement.name}" th:selected="${ticket.departement}"></option> -->
+<!-- 						</select> -->
+<!-- 					</div> -->
+<!-- 					<div class="col-md-4"></div> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+
+<!-- 			<!-- Textarea -->
+<!-- 			<div class="form-group"> -->
+<!-- 				<label class="col-md-4 control-label" for="description">Description</label> -->
+<!-- 				<div class="col-md-4"> -->
+<!-- 					<textarea class="form-control description-field" -->
+<!-- 						th:field="*{description}" id="description" name="description"></textarea> -->
+<!-- 					<span th:errors="*{description}" class="error"></span> -->
+
+<!-- 				</div> -->
+<!-- 			</div> -->
+
+<!-- 			<!-- File Button -->
+<!-- 			<div class="form-group"> -->
+<!-- 				<label class="col-md-4 control-label" for="attachments">Attachments</label> -->
+<!-- 				<div class="col-md-4"> -->
+<!-- 					<input id="attachments" name="attachments" class="input-file" -->
+<!-- 						type="file"> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+
+<!-- 			<!-- Button -->
+<!-- 			<div class="form-group"> -->
+<!-- 				<div class="col-md-4"> -->
+<!-- 					<button type="submit" class="btn btn-success">Create -->
+<!-- 						ticket</button> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+
+<!-- 		</fieldset> -->
+<!-- 	</form> -->
+
+
+<!-- </body> -->
+<!-- </html> -->
+
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<head th:replace="fragments :: head"></head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
-<body class="container">
-
-	<nav th:replace="fragments :: navigation"></nav>
-
-	<form class="form-horizontal" method="POST" th:action="@{/ticket/new}"
-		th:object="${ticket}">
-		<fieldset>
-			<!-- Form Name -->
-			<legend>Create a new ticket</legend>
-
-			<!-- Text input-->
-			<div class="form-group">
-				<label class="col-md-4 control-label" for="title">Title</label>
-				<div class="col-md-4">
-					<input id="title" name="title" th:field="*{title}" type="text"
-						placeholder="" class="form-control input-md title-field">
-					<span th:errors="*{title}" class="error"></span><br /> <span
-						class="countdown"></span>
-				</div>
-			</div>
-
-			<div class="form-group">
-				<div class="row justify-content-center">
-					<label class="col-md-8 control-label" for="ticket-priorite">Priorité</label>
-				</div>
-				<div class="row justify-content-center">
-
-					<div class="col-md-4">
-						<!--<input id="ticket-status" name="ticket-status" th:field="*{priorite}" type="text" placeholder="" class="form-control input-md">-->
-						<select id="ticket-status" name="ticket-status"
-							th:field="*{priorite}" class="custom-select">
-							<option th:each="priorite : ${priorites}" th:value="${priorite}"
-								th:text="${priorite.name}" th:selected="${ticket.priorite}"></option>
-						</select>
-					</div>
-					<div class="col-md-4"></div>
-				</div>
-			</div>
-			
-			<div class="form-group">
-				<div class="row justify-content-center">
-					<label class="col-md-8 control-label" for="ticket-departement">Département</label>
-				</div>
-				<div class="row justify-content-center">
-
-					<div class="col-md-4">
-						<!--<input id="ticket-status" name="ticket-status" th:field="*{departement}" type="text" placeholder="" class="form-control input-md">-->
-						<select id="ticket-status" name="ticket-status"
-							th:field="*{departement}" class="custom-select">
-							<option th:each="departement : ${departements}" th:value="${departement}"
-								th:text="${departement.name}" th:selected="${ticket.departement}"></option>
-						</select>
-					</div>
-					<div class="col-md-4"></div>
-				</div>
-			</div>
-
-			<!-- Textarea -->
-			<div class="form-group">
-				<label class="col-md-4 control-label" for="description">Description</label>
-				<div class="col-md-4">
-					<textarea class="form-control description-field"
-						th:field="*{description}" id="description" name="description"></textarea>
-					<span th:errors="*{description}" class="error"></span>
-
-				</div>
-			</div>
-
-			<!-- File Button -->
-			<div class="form-group">
-				<label class="col-md-4 control-label" for="attachments">Attachments</label>
-				<div class="col-md-4">
-					<input id="attachments" name="attachments" class="input-file"
-						type="file">
-				</div>
-			</div>
-
-			<!-- Button -->
-			<div class="form-group">
-				<div class="col-md-4">
-					<button type="submit" class="btn btn-success">Create
-						ticket</button>
-				</div>
-			</div>
-
-		</fieldset>
-	</form>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport"
+  content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="apple-touch-icon" sizes="76x76"
+  href="../assets/img/apple-icon.png">
+<link rel="icon" type="image/png" href="../assets/img/favicon.png">
+<title>New</title>
+<!--     Fonts and icons     -->
+<link rel="stylesheet" type="text/css"
+  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+<!-- Nucleo Icons -->
+<link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
+<link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+<!-- Font Awesome Icons -->
+<script src="https://kit.fontawesome.com/42d5adcbca.js"
+  crossorigin="anonymous"></script>
+<!-- Material Icons -->
+<link
+  href="https://fonts.googleapis.com/icon?family=Material+Icons+Round"
+  rel="stylesheet">
+<!-- CSS Files -->
+<link rel="stylesheet" th:href="@{/css/material-dashboard.css}" />
+<link id="pagestyle" th:href="@{/css/material-dashboard.css?v=3.0.4}"
+  rel="stylesheet" />
+<!--       <link rel="stylesheet" th:href="@{/css/custom.css}"/> -->
 
 
+</head>
+<body>
+  <nav th:replace="fragments :: navigation"></nav>
+
+  <main class="main-content  mt-0">
+    <section>
+      <div class="page-header min-vh-100">
+        <div class="container">
+          <div class="row">
+            <div
+              class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 start-0 text-center justify-content-center flex-column">
+              <div
+                class="position-relative bg-gradient-primary h-100 m-3 border-radius-lg d-flex flex-column justify-content-center overflow-hidden">
+                <img alt=""
+                  th:src="@{/img/illustration-signup.jpg}" style="background-size: cover;">
+              </div>
+            </div>
+            <div
+              class="col-xl-4 col-lg-9 col-md-7 d-flex flex-column ms-auto me-auto ms-lg-auto me-lg-5">
+              <div class="card card-plain">
+                <div class="card-header">
+                  <h4 class="font-weight-bolder">Creer un ticket</h4>
+                  <p class="mb-0"></p>
+                </div>
+                <div class="card-body">
+                  <form role="form" method="POST"
+                    th:action="@{/ticket/new}" th:object="${ticket}">
+                    <div class="input-group input-group-outline">
+                      <label class="form-label"></label> 
+                      <input placeholder="Titre" class="form-control" id="title" name="title" th:field="*{title}"
+                        type="text">
+                        <div class="input-group input-group-outline mb-3">
+                        <span th:errors="*{title}" style="color: red"></span></div>
+                    </div>
+                    <div class="input-group input-group-outline ">
+                      <label class="form-label"></label> <select
+                        id="ticket-status" name="ticket-status"
+                        th:field="*{priorite}" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                        <option th:each="priorite : ${priorites}"
+                          th:value="${priorite}"
+                          th:text="${priorite.name}"
+                          th:selected="${ticket.priorite}"></option>
+                      </select>
+                    </div>
+                    <div class="input-group input-group-outline">
+                      <label class="form-label"></label> <select
+                        id="ticket-status" name="ticket-status"
+                        th:field="*{departement}" class="form-select form-select-lg mb-3">
+                        <option th:each="departement : ${departements}"
+                          th:value="${departement}"
+                          th:text="${departement.name}"
+                          th:selected="${ticket.departement}"></option>
+                      </select>
+                    </div>
+                    <div class="input-group input-group-outline">
+                      <label class="form-label"></label>
+                      <textarea class="form-control description-field"
+                        th:field="*{description}" id="description" placeholder="Description"
+                        name="description"></textarea>
+                      <div class="input-group input-group-outline">
+                        <span th:errors="*{description}" style="color: red"></span></div>
+                    </div>
+                    <div class="text-center">
+                      <button type="submit"
+                        class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0">Save</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 </body>
+
 </html>

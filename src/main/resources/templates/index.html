@@ -90,7 +90,10 @@
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
-	<aside
+  <nav th:replace="fragments :: navigation"></nav>
+
+	<aside th:each="role : ${loggedInUser.roles}"
+        th:if="${role.role} == 'SUPPORT'"
 		class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark"
 		id="sidenav-main">
 		<div class="sidenav-header">
@@ -143,7 +146,7 @@
 							class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
 							<div
 								class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-								<h6 class="text-white text-capitalize ps-3">Authors table</h6>
+								<h6 class="text-white text-capitalize ps-3">Mes tickets</h6>
 							</div>
 						</div>
 						<div class="card-body px-0 pb-2">
@@ -167,7 +170,7 @@
 									<tbody>
 									
 									<div th:each="ticket : ${openTickets}"
-							th:if="${ticket.assignedTo != null} and ${ticket.getAssignedTo().id == loggedInUser.getId()}">
+							th:if="${ticket.getCreatedBy().id == loggedInUser.getId()}">
 										<tr>
 											<th class="text-center" scope="row"><a th:text="${ticket.id}" th:href="@{'/ticket/'+${ticket.id}}"></a>
 											</th>
