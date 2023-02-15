@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org/" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html lang="en" xmlns:th="http://www.thymeleaf.org/" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head th:fragment="head">
     <meta charset="UTF-8"/>
     <title th:text="${title}">Helpdesk</title>
@@ -25,8 +25,8 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="/">Dashboard <span class="sr-only">(current)</span></a>
+            <li class="nav-item active" th:each="role : ${loggedInUser.roles}">
+                <a th:if="${role.role} == 'SUPPORT'" class="nav-link" href="/">Dashboard <span class="sr-only">(current)</span></a>
             </li>
             <!--<li class="nav-item">-->
                 <!--<a class="nav-link" href="/">Link</a>-->
@@ -39,8 +39,8 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="/ticket/new">New Ticket</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="/ticket/">My Open Tickets</a>
-                    <a class="dropdown-item" href="#">My Closed Tickets</a>
+                    <a class="dropdown-item" href="/ticket/open">My Open Tickets</a>
+                    <a class="dropdown-item" href="/ticket/close">My Closed Tickets</a>
                         <!--TODO - send to closed ticket queue when page is created-->
                 </div>
             </li>

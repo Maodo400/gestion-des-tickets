@@ -19,12 +19,20 @@ public class Ticket {
     private int id;
 
     @NotNull
-    @Size(min=1, max=50, message = "Title too long (max 50 characters)")
+    @Size(min = 1, max = 50, message = "Title too long (max 50 characters)")
     private String title;
 
     @NotNull
-    @Size(min=1, max=500, message = "Description too long (max 500 characters)")
+    @Size(min = 1, max = 500, message = "Description too long (max 500 characters)")
     private String description;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "departement")
+    private ListDepartement departement;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "priorite")
+    private ListPriorite priorite;
 
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
@@ -36,8 +44,8 @@ public class Ticket {
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastUpdated;
 
-    @ManyToMany(cascade=CascadeType.ALL)
-    @JoinTable(name="ticket_status", joinColumns=@JoinColumn(name="ticket_id"), inverseJoinColumns=@JoinColumn(name="status_id"))
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "ticket_status", joinColumns = @JoinColumn(name = "ticket_id"), inverseJoinColumns = @JoinColumn(name = "status_id"))
     private List<Status> updates;
 
     @ManyToOne
@@ -47,19 +55,27 @@ public class Ticket {
     @ManyToOne
     private User assignedTo;
 
+    @Enumerated(EnumType.STRING)
     private Stage stage;
 
     public Ticket() {
-        this.stage = Stage.OPEN;
+        this.stage = Stage.RECU;
+        this.priorite = ListPriorite.FAIBLE;
+        this.departement = ListDepartement.SUPPORT_TECHNIQUE;
     }
 
-    public Ticket(String title, String description, User createdBy) {
-        this.title = title;
-        this.description = description;
-        this.createdBy = createdBy;
-    }
+	public Ticket(@NotNull @Size(min = 1, max = 50, message = "Titre trop long") String title,
+			@NotNull @Size(min = 1, max = 500, message = "Description trop long") String description,
+			ListDepartement departement, ListPriorite priorite, User createdBy) {
+		super();
+		this.title = title;
+		this.description = description;
+		this.departement = departement;
+		this.priorite = priorite;
+		this.createdBy = createdBy;
+	}
 
-    public int getId() {
+	public int getId() {
         return id;
     }
 
@@ -119,7 +135,7 @@ public class Ticket {
         this.updates = updates;
     }
 
-    public void addUpdate(Status update){
+    public void addUpdate(Status update) {
         updates.add(update);
     }
 
@@ -138,4 +154,29 @@ public class Ticket {
     public void setStage(Stage stage) {
         this.stage = stage;
     }
+
+	public ListDepartement getDepartement() {
+		return departement;
+	}
+
+	public void setDepartement(ListDepartement departement) {
+		this.departement = departement;
+	}
+
+	public ListPriorite getPriorite() {
+		return priorite;
+	}
+
+	public void setPriorite(ListPriorite priorite) {
+		this.priorite = priorite;
+	}
+
+	@Override
+	public String toString() {
+		return "Ticket [id=" + id + ", title=" + title + ", description=" + description + ", departement=" + departement
+				+ ", priorite=" + priorite + ", dateOpened=" + dateOpened + ", dateClosed=" + dateClosed
+				+ ", lastUpdated=" + lastUpdated + ", updates=" + updates + ", createdBy=" + createdBy + ", assignedTo="
+				+ assignedTo.toString() + ", stage=" + stage + "]";
+	}
+    
 }

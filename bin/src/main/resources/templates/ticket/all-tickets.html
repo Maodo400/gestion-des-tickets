@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<body class="container">
+
+    <nav th:replace="fragments :: navigation"></nav>
+
+    <div class="row">
+        <div class="col-1">
+
+        </div>
+        <div class="col-10">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Ticket</th>
+                    <th scope="col">Ticket Title</th>
+                    <th scope="col">Date Opened</th>
+                    <th scope="col">Last Updated</th>
+                    <th scope="col">Assigned To</th>
+                    <th scope="col">Stage</th>
+                </tr>
+                </thead>
+                <tr th:each="ticket : ${openTickets}">
+                    <td ><a th:text="${ticket.id}" th:href="@{'/ticket/'+${ticket.id}}"></a></td>
+                    <td th:text="${ticket.title}"></td>
+                    <td th:text="${#dates.format(ticket.dateOpened, 'M/dd/yy h:mm a')}"></td>
+                    <td th:text="${#dates.format(ticket.lastUpdated, 'M/dd/yy h:mm a')}"></td>
+                    <td th:if="${ticket.assignedTo != null}" th:text="${ticket.assignedTo.firstName}+ ' ' +${ticket.assignedTo.lastName}" >Unassigned</td>
+                    <td th:unless="${ticket.assignedTo != null}">Unassigned</td>
+                    <td th:text="${ticket.stage}"></td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-1">
+
+        </div>
+
+    </div>
+</body>
+</html>

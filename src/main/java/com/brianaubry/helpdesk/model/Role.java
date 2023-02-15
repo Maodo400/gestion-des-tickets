@@ -32,4 +32,20 @@ public class Role {
         this.role = role;
     }
 
+	public Role(String role) {
+		super();
+		this.role = role;
+	}
+
+	public Role() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public String toString() {
+		return "Role [id=" + id + ", role=" + role + "]";
+	}
+    
+
 }

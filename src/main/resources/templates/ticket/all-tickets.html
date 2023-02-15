@@ -1,42 +1,139 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 
 <body class="container">
 
-    <nav th:replace="fragments :: navigation"></nav>
+	<nav th:replace="fragments :: navigation"></nav>
 
-    <div class="row">
-        <div class="col-1">
+	<div class="row">
+		<div class="col-1"></div>
+		<div class="col-10">
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">Ticket</th>
+						<th scope="col">Ticket Title</th>
+						<th scope="col">Priorite</th>
+						<th scope="col">Departement</th>
+						<th scope="col">Date Opened</th>
+						<th scope="col">Last Updated</th>
+						<th scope="col">Assigned To</th>
+						<th scope="col">Stage</th>
+					</tr>
+				</thead>
+				<tr th:each="ticket : ${openTickets}">
+					<td><a th:text="${ticket.id}"
+						th:href="@{'/ticket/'+${ticket.id}}"></a></td>
+					<td th:text="${ticket.title}"></td>
+										<td th:text="${ticket.priorite}"></td>
 
-        </div>
-        <div class="col-10">
-            <table class="table">
-                <thead>
-                <tr>
-                    <th scope="col">Ticket</th>
-                    <th scope="col">Ticket Title</th>
-                    <th scope="col">Date Opened</th>
-                    <th scope="col">Last Updated</th>
-                    <th scope="col">Assigned To</th>
-                    <th scope="col">Stage</th>
-                </tr>
-                </thead>
-                <tr th:each="ticket : ${openTickets}">
-                    <td ><a th:text="${ticket.id}" th:href="@{'/ticket/'+${ticket.id}}"></a></td>
-                    <td th:text="${ticket.title}"></td>
-                    <td th:text="${#dates.format(ticket.dateOpened, 'M/dd/yy h:mm a')}"></td>
-                    <td th:text="${#dates.format(ticket.lastUpdated, 'M/dd/yy h:mm a')}"></td>
-                    <td th:if="${ticket.assignedTo != null}" th:text="${ticket.assignedTo.firstName}+ ' ' +${ticket.assignedTo.lastName}" >Unassigned</td>
-                    <td th:unless="${ticket.assignedTo != null}">Unassigned</td>
-                    <td th:text="${ticket.stage}"></td>
-                </tr>
-            </table>
-        </div>
-        <div class="col-1">
+					<td th:text="${ticket.departement}"></td>
+					<td th:text="${#dates.format(ticket.dateOpened, 'M/dd/yy h:mm a')}"></td>
+					<td
+						th:text="${#dates.format(ticket.lastUpdated, 'M/dd/yy h:mm a')}"></td>
+					<td th:if="${ticket.assignedTo != null}"
+						th:text="${ticket.assignedTo.firstName}+ ' ' +${ticket.assignedTo.lastName}">Unassigned</td>
+					<td th:unless="${ticket.assignedTo != null}">Unassigned</td>
+					<td th:text="${ticket.stage}"></td>
+				</tr>
+			</table>
+		</div>
+		<div class="col-1"></div>
 
-        </div>
-
-    </div>
+	</div>
 </body>
+</html>-->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<meta charset="utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Material Dashboard 2 by Creative Tim</title>
+<!--     Fonts and icons     -->
+<link rel="stylesheet" th:href="@{/css/material-dashboard.css}">
+<link id="pagestyle" th:href="@{/css/material-dashboard.css?v=3.0.4}"
+	rel="stylesheet" />
+</head>
+
+<body class="g-sidenav-show  bg-gray-200">
+	<nav th:replace="fragments :: navigation"></nav>
+
+	<main
+		class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+		<!-- Navbar -->
+		<!-- End Navbar -->
+		<div class="container-fluid py-4">
+			<div class="row">
+				<div class="col-12">
+					<div class="card my-4">
+						<div
+							class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+							<div
+								class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+								<h6 class="text-white text-capitalize ps-3">Authors table</h6>
+							</div>
+						</div>
+						<div class="card-body px-0 pb-2">
+							<div class="table-responsive p-0">
+								<table class="table align-items-center mb-0">
+									<thead>
+										<tr>
+											<th
+												class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
+											<th
+												class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">TITRE</th>
+											<th
+												class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">PRIORITE</th>
+											<th
+												class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">DEPARTEMENT</th>
+<!-- 											<th -->
+<!-- 												class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">DATE -->
+<!-- 												OUVERTE</th> -->
+<!-- 											<th -->
+<!-- 												class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">DERNIERE -->
+<!-- 												UPDATE</th> -->
+											<th
+												class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ASSIGNE
+												A</th>
+											<th
+												class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">STATUS</th>
+
+											<th class="text-secondary opacity-7"></th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="ticket : ${openTickets}">
+											<td><a th:text="${ticket.id}" th:href="@{'/ticket/'+${ticket.id}}"></a></td>
+											<td th:text="${ticket.title}"></td>
+											<td th:text="${ticket.priorite}"></td>
+																<td th:text="${ticket.departement}"></td>
+											
+<!-- 											<td -->
+<!-- 												th:text="${#dates.format(ticket.dateOpened, 'M/dd/yy h:mm a')}"></td> -->
+<!-- 											<td -->
+<!-- 												th:text="${#dates.format(ticket.lastUpdated, 'M/dd/yy h:mm a')}"></td> -->
+											<td th:if="${ticket.assignedTo != null}"
+												th:text="${ticket.assignedTo.firstName}+ ' ' +${ticket.assignedTo.lastName}">Unassigned</td>
+											<td th:unless="${ticket.assignedTo != null}">Unassigned</td>
+											<td th:text="${ticket.stage}"></td>
+											<td class="align-middle"><a th:href="@{'/ticket/'+${ticket.id}}"
+												class="text-secondary font-weight-bold text-xs"
+												data-toggle="tooltip" data-original-title="Edit user">
+													Edit </a></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</main>
+</body>
+
 </html>

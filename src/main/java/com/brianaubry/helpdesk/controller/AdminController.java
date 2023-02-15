@@ -36,8 +36,8 @@ public class AdminController {
     public User populateUserDetails(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User loggedInUser = userService.findUserByEmail(auth.getName());
-        model.addAttribute("isUser", userService.isUser(loggedInUser));
-        model.addAttribute("isAdmin", userService.isAdmin(loggedInUser));
+        model.addAttribute("isUser", true);
+        model.addAttribute("isAdmin", false);
         return loggedInUser;
     }
 
@@ -54,10 +54,10 @@ public class AdminController {
     }
 
     @RequestMapping(value = "create", method = RequestMethod.GET)
-    public String create(Model model, @ModelAttribute User loggedInUser){
+    public String create(Model model){
 
-        populateUserDetails(model);
-        model.addAttribute("userName", loggedInUser.getFirstName() + " " + loggedInUser.getLastName());
+//        populateUserDetails(model);
+//        model.addAttribute("userName", loggedInUser.getFirstName() + " " + loggedInUser.getLastName());
 
         User newUser = new User();
         model.addAttribute("user", newUser);
@@ -81,7 +81,7 @@ public class AdminController {
             userService.saveUser(user);
             model.addAttribute("msg","User registered successfully");
             model.addAttribute("user", new User());
-            return "admin/create";
+            return "login";
         }
     }
 

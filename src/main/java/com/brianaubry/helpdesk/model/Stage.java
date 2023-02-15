@@ -2,12 +2,12 @@ package com.brianaubry.helpdesk.model;
 
 public enum Stage {
 
-    OPEN ("Open"),
-    ASSIGNED ("Assigned"),
-    WORKING ("Working"),
-    HOLD ("On hold"),
-    PENDING_INPUT ("Pending input"),
-    CLOSED ("Closed");
+    RECU ("Recu"),
+    EN_COURS ("En Cours"),
+    NE_PAS_TRAITER ("Ne pas traiter"),
+    EN_ATTENTE ("en attente"),
+    TERMINE ("termine"),
+	CLOTURE ("cloture");
 
     private final String name;
 

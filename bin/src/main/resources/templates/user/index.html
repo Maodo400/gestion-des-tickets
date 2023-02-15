@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="fragments :: head"></head>
+
+<body class="container">
+
+<nav th:replace="fragments :: navigation"></nav>
+
+<div class="container">
+    <h2> this will be the homepage of a user to view their tickets</h2>
+    <a th:href="@{/user/logout}">Sign out</a>
+
+</div>
+
+</body>
+</html>
